@@ -39,5 +39,10 @@ function operate(prev, operator, next) {
     };
 };
 
-operate(1, "+", 2);
+const ac = document.querySelector('.ac');
+ac.addEventListener('click', turn_on);
+function turn_on() {
+    const calcScreen = document.querySelector('.screen');
+    calcScreen.style.backgroundColor = '#B4D8B2';
+}
 
