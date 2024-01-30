@@ -91,8 +91,20 @@ button:hover{
     0 0 120px var(--gold-light),
     0 0 160px var(--gold-light);
     box-shadow: 0 0 10px var(--gold-light);
-    font-size: 2rem;
-    
+    font-size: 2rem;   
+}
+
+.onHover{
+    color:#FFB606;
+    text-shadow: 0 0 10px var(--gold-light),
+    0 0 10px var(--gold-light),
+    0 0 20px var(--gold-light),
+    0 0 40px var(--gold-light),
+    0 0 80px var(--gold-light),
+    0 0 120px var(--gold-light),
+    0 0 160px var(--gold-light);
+    box-shadow: 0 0 10px var(--gold-light);
+    font-size: 2rem; 
 }
 
 .rows{
