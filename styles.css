@@ -12,9 +12,15 @@
     
     --black-light: #3B3B3B;
     --black: #1C1C1C;
-  }
-  
-  
+
+    --green-light: #B4D8B2;
+    --green: #6B9362;
+}
+
+body{
+    background-color: var(--black-light);
+}
+
 
 .calculator{
     display: flex;
@@ -36,7 +42,7 @@
     min-height: 10rem;
     margin: 1rem;
     padding: 2rem;
-    background-color: aliceblue;
+    background-color: var(--green);
     border: solid black 2px;
     border-radius: 1rem;
     text-align: right;
@@ -64,8 +70,8 @@
 button{
     background: none;
     background-color: var(--black-light);
-    color: #B28228;
-    border: solid #B28228 2px;
+    color: var(--gold);
+    border: solid var(--gold) 2px;
     border-radius: 1rem;
     outline: none;
     box-shadow: none;
@@ -75,12 +81,27 @@ button{
     padding: 1rem;
 }
 
+button:hover{
+    color:#FFB606;
+    text-shadow: 0 0 10px var(--gold-light),
+    0 0 10px var(--gold-light),
+    0 0 20px var(--gold-light),
+    0 0 40px var(--gold-light),
+    0 0 80px var(--gold-light),
+    0 0 120px var(--gold-light),
+    0 0 160px var(--gold-light);
+    box-shadow: 0 0 10px var(--gold-light);
+    font-size: 2rem;
+    
+}
+
 .rows{
 
 }
 
 .big button{
     background-color: #b76e79;
+    color: var(--gold-light);
     flex: 1 1 0;
 }
 
@@ -103,6 +124,3 @@ button{
     margin-bottom: 1.5rem;
 }
 
-button:hover{
-    color:#FFB606;
-}
