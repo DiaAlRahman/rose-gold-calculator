@@ -1,0 +1,66 @@
+@font-face{
+    font-family:'digital-clock-font';
+    src: url('./digital-7/digital-7 (mono italic).ttf');
+}
+
+.calculator{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.case{
+    background-color: lightgray;
+    min-width: 500px;
+    min-height: 700px;
+}
+
+.screen{
+    min-height: 10rem;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: aliceblue;
+    border: solid black 2px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    font-family: 'digital-clock-font';
+}
+
+.prev-result{
+    font-size: 2rem;
+}
+
+.curr-result{
+    font-size: 4rem;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+button{
+    background: none;
+    background-color: aliceblue;
+    border: solid black 2px;
+    outline: none;
+    box-shadow: none;
+    font-size: 1.5rem;
+    min-width: 3rem;
+    min-height: 3rem;
+}
+
+.big button{
+    min-width: 50%;
+    background-color: lightskyblue;
+}
+
+.small button{
+}
+
+.row1 {
+    display: flex;
+}
