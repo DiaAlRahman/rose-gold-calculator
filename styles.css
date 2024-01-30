@@ -3,6 +3,19 @@
     src: url('./digital-7/digital-7 (mono italic).ttf');
 }
 
+:root {
+    --rose-light: #F7D7DA;
+    --rose: #E9A4AE;
+    
+    --gold-light: #FFB606;
+    --gold: #B28228;
+    
+    --black-light: #3B3B3B;
+    --black: #1C1C1C;
+  }
+  
+  
+
 .calculator{
     display: flex;
     flex-direction: column;
@@ -10,9 +23,13 @@
 }
 
 .case{
-    background-color: lightgray;
-    min-width: 500px;
+    background-color:  var(--black);
+    border: solid  2px;
+    border-radius: 1rem;
+    min-width: 400px;
     min-height: 700px;
+    display: flex;
+    flex-direction: column;
 }
 
 .screen{
@@ -21,6 +38,7 @@
     padding: 2rem;
     background-color: aliceblue;
     border: solid black 2px;
+    border-radius: 1rem;
     text-align: right;
     display: flex;
     flex-direction: column;
@@ -39,28 +57,52 @@
 .buttons{
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
+    padding: 0 1rem;
 }
 
 button{
     background: none;
-    background-color: aliceblue;
-    border: solid black 2px;
+    background-color: var(--black-light);
+    color: #B28228;
+    border: solid #B28228 2px;
+    border-radius: 1rem;
     outline: none;
     box-shadow: none;
     font-size: 1.5rem;
-    min-width: 3rem;
-    min-height: 3rem;
+    min-width: 5rem;
+    min-height: 5rem;
+    padding: 1rem;
+}
+
+.rows{
+
 }
 
 .big button{
-    min-width: 50%;
-    background-color: lightskyblue;
+    background-color: #b76e79;
+    flex: 1 1 0;
+}
+
+.small{
+    display: flex;
+    justify-content: space-between;
 }
 
 .small button{
+    flex: 0 1 0;
 }
 
 .row1 {
     display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.row5{
+    margin-bottom: 1.5rem;
+}
+
+button:hover{
+    color:#FFB606;
 }
