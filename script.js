@@ -5,6 +5,7 @@ function insert(str, index, value) {
     str = str.split('').reverse().join('');
     return str;
 }
+
 // These functions are the core responsiblities of a calculator, they will take two numbers
 // and return an answer according to that.
 function add(prev, next) {
@@ -25,21 +26,18 @@ function operate(prev, operator, next) {
     switch (operator) {
         case "+":
             result = add(prev, next);
-            console.log(result);
             break;
         case "-":
             result = subtract(prev, next);
-            console.log(result);
             break;
         case "*":
             result = multiply(prev, next);
-            console.log(result);
             break;
         case "/":
             result = divide(prev, next);
-            console.log(result);
             break;
     };
+    return result;
 };
 
 const MAX_CHARS = 9
@@ -49,16 +47,25 @@ const calculator = document.querySelector('.calculator');
 let decIn = false;
 let zero = false;
 
+//Will be used for the core calculation needs.
+let n1, n2, result = 0;
+let operator = '';
+
 const ac = document.querySelector('#ac');
 ac.addEventListener('click', turn_on);
 function turn_on() {
     const calcScreen = document.querySelector('.screen');
     const curr = document.querySelector('.curr-result');
+    const prev = document.querySelector('.prev-result');
 
     calcScreen.style.backgroundColor = '#B4D8B2';
-
+    
+    prev.textContent = '';
     curr.textContent = '0.';
+    n1, n2, result = 0;
+    operator = '';
     zero = false;
+    decIn = false;
 
     if (calculator.id === 'OFF') {
         calculator.addEventListener('keydown', (e) => {
@@ -187,7 +194,8 @@ function turn_on() {
 // listener. AC will turn on the calc, and hence 'activate' the other buttons.
 addEventListener('keydown', (event) => {
     if (event.key === 'Delete') {
-        document.querySelector('.curr-result').style.color= '#B4D8B2';
+        document.querySelector('.curr-result').style.color = '#B4D8B2';
+        document.querySelector('.prev-result').style.color = '#B4D8B2';
         ac.className = 'onHover';
         ac.click();
         calculator.focus();
@@ -196,7 +204,8 @@ addEventListener('keydown', (event) => {
 });
 addEventListener('keyup', (event) => {
     if (event.key === 'Delete') {
-        document.querySelector('.curr-result').style.color= '';
+        document.querySelector('.curr-result').style.color = 'black';
+        document.querySelector('.prev-result').style.color = 'black';
         event.preventDefault();
         ac.classList.remove('onHover');
     }
@@ -204,11 +213,14 @@ addEventListener('keyup', (event) => {
 
 
 calculator.addEventListener('keypress', (event) => {
+    calculate(event);
+});
+
+function calculate(event) {
     if (calculator.id === 'ON') {
         updateDisplay(event);
-        console.log(event);
     }
-});
+}
 
 function updateDisplay(event) {
     const curr = document.querySelector('.curr-result');
@@ -222,15 +234,55 @@ function updateDisplay(event) {
                 curr.textContent = insert(curr.textContent, 1, event.key);
             }
             if (!zero) {
-                console.log(zero);
                 curr.textContent = curr.textContent.replace('0', '');
                 zero = true;
             }
-        }
+        };
+
         if ((event.key === '.')) {
             decIn = true;
         };
+
+        const ops = ['+', '-', '*', '/'];
+        if (ops.includes(event.key)) {
+            if (operator === '=') {
+                prev.textContent = n1 + event.key;
+                operator = event.key;
+            } else if (prev.textContent) {
+                n2 = Number(curr.textContent);
+                result = operate(n1, operator, n2);
+                operator = event.key;
+                n1 = result;
+            } else if (!prev.textContent) {
+                n1 = Number(curr.textContent);
+                operator = event.key; // This is here because the initial operator is required
+            };
+
+            if (result) {
+                prev.textContent = result + event.key;
+            } else if (decIn) {
+                prev.textContent = curr.textContent + event.key;
+            } else {
+                prev.textContent = curr.textContent.slice(0, -1) + event.key;
+            };
+
+            curr.textContent = '0.';
+            zero = false;
+            decIn = false;
+        } else if (event.key === '=' && (!(operator === '='))) {
+            n2 = Number(curr.textContent);
+            prev.textContent = n1 + operator + n2 + event.key;
+            curr.textContent = operate(n1, operator, n2);
+
+            if (!curr.textContent.includes('.'))
+                curr.textContent += '.';
+
+            n1 = Number(curr.textContent);
+            operator = event.key;
+        };
+        
     };
+
 };
 
 

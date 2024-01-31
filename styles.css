@@ -111,10 +111,6 @@ button:hover{
     font-size: 2rem; 
 }
 
-.rows{
-
-}
-
 .big button{
     background-color: #b76e79;
     color: var(--gold-light);
