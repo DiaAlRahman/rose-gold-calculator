@@ -216,7 +216,11 @@ function updateDisplay(event) {
 
     if (curr.textContent.length < MAX_CHARS) {
         if (Number(event.key) || event.key === '0') {
-            curr.textContent = insert(curr.textContent, 1, event.key);
+            if (decIn) {
+                curr.textContent += event.key;
+            } else {
+                curr.textContent = insert(curr.textContent, 1, event.key);
+            }
             if (!zero) {
                 console.log(zero);
                 curr.textContent = curr.textContent.replace('0', '');
