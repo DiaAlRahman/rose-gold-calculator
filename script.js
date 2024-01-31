@@ -34,13 +34,16 @@ function operate(prev, operator, next) {
             result = multiply(prev, next);
             break;
         case "/":
-            result = divide(prev, next);
+            if (next == 0) 
+                return "That's offensive";
+            else
+                result = divide(prev, next);
             break;
     };
     return fixDp(result);
 };
 
-const MAX_CHARS = 9
+const MAX_CHARS = 8
 const calculator = document.querySelector('.calculator');
 
 // These ones are for the update display function.
@@ -239,7 +242,7 @@ function updateDisplay(event) {
     const curr = document.querySelector('.curr-result');
     const prev = document.querySelector('.prev-result');
 
-    if (curr.textContent.length < MAX_CHARS) {
+    if (curr.textContent.length <= MAX_CHARS) {
         if (Number(event.key) || event.key === '0') {
             if (decIn) {
                 curr.textContent += event.key;
