@@ -4,7 +4,7 @@ function insert(str, index, value) {
     str = str.substr(0, index) + value + str.substr(index);
     str = str.split('').reverse().join('');
     return str;
-}
+};
 
 // These functions are the core responsiblities of a calculator, they will take two numbers
 // and return an answer according to that.
@@ -37,7 +37,7 @@ function operate(prev, operator, next) {
             result = divide(prev, next);
             break;
     };
-    return result;
+    return fixDp(result);
 };
 
 const MAX_CHARS = 9
@@ -46,6 +46,7 @@ const calculator = document.querySelector('.calculator');
 // These ones are for the update display function.
 let decIn = false;
 let zero = false;
+let clear = true;
 
 //Will be used for the core calculation needs.
 let n1, n2, result = 0;
@@ -193,12 +194,24 @@ function turn_on() {
 // the window event listener, where the other buttons will have the calculator event 
 // listener. AC will turn on the calc, and hence 'activate' the other buttons.
 addEventListener('keydown', (event) => {
+    const curr = document.querySelector('.curr-result')
     if (event.key === 'Delete') {
-        document.querySelector('.curr-result').style.color = '#B4D8B2';
+        curr.style.color = '#B4D8B2';
         document.querySelector('.prev-result').style.color = '#B4D8B2';
         ac.className = 'onHover';
         ac.click();
         calculator.focus();
+    } else if (event.key === 'Backspace') {
+        if ((curr.textContent.length === 2)) {
+            curr.textContent = '0.';
+        }
+        else if (!decIn) {
+            curr.textContent = curr.textContent.slice(0, curr.textContent.length - 2)
+                + curr.textContent.slice(curr.textContent.length - 1);
+        }
+        else {
+            curr.textContent = curr.textContent.slice(0, curr.textContent.length - 1);
+        }
     }
 
 });
@@ -272,19 +285,28 @@ function updateDisplay(event) {
         } else if (event.key === '=' && (!(operator === '='))) {
             n2 = Number(curr.textContent);
             prev.textContent = n1 + operator + n2 + event.key;
-            curr.textContent = operate(n1, operator, n2);
+            result = operate(n1, operator, n2);
+            curr.textContent = result;
 
             if (!curr.textContent.includes('.'))
                 curr.textContent += '.';
 
             n1 = Number(curr.textContent);
             operator = event.key;
-        };
-        
+        };  
     };
-
 };
 
+function fixDp(num) {
+    let len = String(num).length;
+    let lenInt = String(Math.round(num)).length + 1;
+
+    if (len > 9) {
+        return num.toFixed(9 - lenInt);
+    };
+
+    return num;
+}
 
 
 
