@@ -45,6 +45,10 @@ function operate(prev, operator, next) {
 const MAX_CHARS = 9
 const calculator = document.querySelector('.calculator');
 
+// These ones are for the update display function.
+let decIn = false;
+let zero = false;
+
 const ac = document.querySelector('#ac');
 ac.addEventListener('click', turn_on);
 function turn_on() {
@@ -54,6 +58,7 @@ function turn_on() {
     calcScreen.style.backgroundColor = '#B4D8B2';
 
     curr.textContent = '0.';
+    zero = false;
 
     if (calculator.id === 'OFF') {
         calculator.addEventListener('keydown', (e) => {
@@ -182,6 +187,7 @@ function turn_on() {
 // listener. AC will turn on the calc, and hence 'activate' the other buttons.
 addEventListener('keydown', (event) => {
     if (event.key === 'Delete') {
+        document.querySelector('.curr-result').style.color= '#B4D8B2';
         ac.className = 'onHover';
         ac.click();
         calculator.focus();
@@ -190,10 +196,12 @@ addEventListener('keydown', (event) => {
 });
 addEventListener('keyup', (event) => {
     if (event.key === 'Delete') {
+        document.querySelector('.curr-result').style.color= '';
         event.preventDefault();
         ac.classList.remove('onHover');
     }
 });
+
 
 calculator.addEventListener('keypress', (event) => {
     if (calculator.id === 'ON') {
@@ -205,22 +213,18 @@ calculator.addEventListener('keypress', (event) => {
 function updateDisplay(event) {
     const curr = document.querySelector('.curr-result');
     const prev = document.querySelector('.prev-result');
-    const decIn = false;
-    const zero = false;
 
     if (curr.textContent.length < MAX_CHARS) {
         if (Number(event.key) || event.key === '0') {
             curr.textContent = insert(curr.textContent, 1, event.key);
             if (!zero) {
+                console.log(zero);
                 curr.textContent = curr.textContent.replace('0', '');
+                zero = true;
             }
         }
-        if ((event.key === '.') && !(curr.textContent.includes('.'))) {
-            console.log(curr.textContent);
-            if (!curr.textContent)
-                curr.textContent = '0.';
-            else
-                curr.textContent += event.key;
+        if ((event.key === '.')) {
+            decIn = true;
         };
     };
 };
