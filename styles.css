@@ -28,6 +28,10 @@ body{
     align-items: center;
 }
 
+.calculator:focus{
+    outline: none;
+}
+
 .case{
     background-color:  var(--black);
     border: solid  2px;
