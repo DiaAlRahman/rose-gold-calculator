@@ -153,15 +153,18 @@ footer p:hover{
     0 0 120px var(--gold-light),
     0 0 160px var(--gold-light);
     font-size: 1.05rem;
-    animation: in 1s ease-out forwards;
+    animation: in 1ms ease-out forwards;
 }
 
 @keyframes in{
     0%{
         letter-spacing: 0px;
     }
-    100%{
+    30%{
         letter-spacing: 0.35px;
+    }
+    100%{
+        text-transform: uppercase;
     }
 }
 
