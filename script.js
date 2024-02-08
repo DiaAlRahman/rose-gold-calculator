@@ -311,5 +311,13 @@ function fixDp(num) {
     return num;
 }
 
+const setTheme = document.getElementById('toggle-theme');
+setTheme.addEventListener('click', () => {
+    const root = document.documentElement;
+    root.className = root.className === 'dark' ? 'light' : 'dark';
+})
+
+console.log(document.documentElement.className)
+
 
 

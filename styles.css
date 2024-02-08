@@ -3,6 +3,19 @@
     src: url('./digital-7/digital-7 (mono italic).ttf');
 }
 
+:root.light {
+    --rose-light: #FFE6E8;
+    --rose: #FFC3C9;
+    
+    --gold-light: #FFF4CC;
+    --gold: #E9C574;
+    
+    --black-light: #F8F8F8;
+    --black: #555555;
+
+    --green-light: #C7E7C1;
+    --green: #8ABE8C;
+}
 
 :root {
     --rose-light: #F7D7DA;
@@ -87,7 +100,7 @@ button{
 }
 
 button:hover{
-    color:#FFB606;
+    color:var(--gold-light);
     text-shadow: 0 0 10px var(--gold-light),
     0 0 10px var(--gold-light),
     0 0 20px var(--gold-light),
@@ -97,6 +110,10 @@ button:hover{
     0 0 160px var(--gold-light);
     box-shadow: 0 0 10px var(--gold-light);
     font-size: 2rem;   
+}
+
+button:active{
+    
 }
 
 .onHover{
@@ -135,6 +152,12 @@ button:hover{
 
 .row5{
     margin-bottom: 1.5rem;
+}
+
+#toggle-theme{
+    position: fixed;
+    left: 72vw;
+    top: 25vh;
 }
 
 footer p{
